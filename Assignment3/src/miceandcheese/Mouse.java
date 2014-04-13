@@ -1,8 +1,12 @@
 package miceandcheese;
 
 public class Mouse implements Runnable {
-	public Mouse(int startRow, int endRow) {
-		
+	private int startRow;
+	private int finishRow;
+	
+	public Mouse(int startRow, int finishRow) {
+		this.startRow = startRow;
+		this.finishRow = finishRow;
 	}
 
 	@Override

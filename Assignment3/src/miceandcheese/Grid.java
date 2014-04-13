@@ -1,9 +1,12 @@
 package miceandcheese;
 
 public class Grid {
-	public int SIZEROW = 8;
-	public int SIZECOL = 8;
-	public Box grid[][] = new Box[SIZEROW][SIZECOL];
+	public static int SIZEROW = 8;
+	public static int SIZECOL = 8;
+	public static Box grid[][] = new Box[SIZEROW][SIZECOL];
+	public static long startTime;
+	public static long totalTime;
+	public static int boxOpenings; 
 
 	public Grid() {
 		for (int row = 0; row < SIZEROW; row++) {
@@ -25,4 +28,6 @@ public class Grid {
 			System.out.println();
 		}
 	}
+	
+	
 }
