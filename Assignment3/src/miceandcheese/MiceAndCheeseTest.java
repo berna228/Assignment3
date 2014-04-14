@@ -1,14 +1,28 @@
 package miceandcheese;
 
 import java.util.Scanner;
+import java.util.concurrent.Semaphore;
 
 public class MiceAndCheeseTest {
-	private static long startTime;
+	private static long startTime = 0;
 	private static long totalTime;
+	private static Semaphore sem = new Semaphore(1);
 	private static int boxOpenings;
 	private static Box[][] grid;
 	private static final int SIZE = 8;
 
+	public static void openBox() {
+		try {
+			sem.acquire();
+			int newBoxOpenings = boxOpenings + 1;
+			boxOpenings = newBoxOpenings;
+		}
+		catch (InterruptedException e) {
+		}
+		finally {
+			sem.release();
+		}
+	}
 	private static class CheeseFinder implements Runnable {
 		private int startRow, finishRow;
 		public CheeseFinder(int startRow, int finishRow) {
@@ -17,19 +31,22 @@ public class MiceAndCheeseTest {
 		}
 		@Override
 		public void run() {
-			startTime = System.currentTimeMillis();
+			if (startTime == 0) 
+				startTime = System.currentTimeMillis();
 			for (int i = startRow; i < finishRow; i++) {
 				for (int j = 0; j < SIZE; j++) {
 					try {
 						Thread.sleep(10);
-						boxOpenings++;
+						openBox();
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
 					if (grid[i][j].containsCheese()) {
+						
 						System.out.println(Thread.currentThread().getName() +
 								" found cheese at \nx = " + i + " y = " + j);
 						totalTime = System.currentTimeMillis() - startTime;
+						
 						System.out.println("total time (ms) = " + totalTime +
 								"\nbox opening count = " + boxOpenings);
 					}
@@ -46,9 +63,6 @@ public class MiceAndCheeseTest {
 		int cheeseLoc = in.nextInt();
 		System.out.println("Enter number of mice: (1, 4, 8)");
 		int numMice = in.nextInt();
-//		if ((numMice != 1) || (numMice != 4) || (numMice != 8)) {
-//			
-//		}
 		in.close();
 		
 		grid = new Box[SIZE][SIZE];
