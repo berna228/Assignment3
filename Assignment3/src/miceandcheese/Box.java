@@ -12,5 +12,7 @@ public class Box {
 		this.position[1] = col;
 		
 	}
-	
+	public Boolean containsCheese(){
+		return containsCheese;
+	}
 }
