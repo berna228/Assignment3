@@ -4,7 +4,7 @@ public class MiceAndCheeseTest {
 	public static long startTime;
 	public static long totalTime;
 	public static int boxOpenings;
-	static Box[][] grid;
+	public static Box[][] grid;
 
 
 	private static class CheeseFinder implements Runnable {
@@ -33,9 +33,8 @@ public class MiceAndCheeseTest {
 	public static void main(String arg[]) {
 		for (int row = 0; row < 8; row++) {
 			for (int col = 0; col < 8; col++) {
-				int position[] = {row, col};
-				if (col == row) grid[row][col] = new Box(true, position);
-				else grid[row][col] = new Box(false, position);
+				if (col == row) grid[row][col] = new Box(true, row, col);
+				else grid[row][col] = new Box(false, row, col);
 			}
 		}
 		Thread mouse0 = new Thread(new CheeseFinder(0,8));

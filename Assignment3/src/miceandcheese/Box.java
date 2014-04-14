@@ -6,9 +6,10 @@ public class Box {
 	public Boolean containsCheese = false;
 
 	// Constructor for Box object
-	public Box(Boolean containsCheese, int position[]) {
+	public Box(Boolean containsCheese, int row, int col) {
 		this.containsCheese = containsCheese;
-		this.position = position;
+		this.position[0] = row;
+		this.position[1] = col;
 		
 	}
 	
