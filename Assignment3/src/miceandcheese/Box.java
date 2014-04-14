@@ -9,5 +9,7 @@ public class Box {
 	public Box(Boolean containsCheese, int position[]) {
 		this.containsCheese = containsCheese;
 		this.position = position;
+		
 	}
+	
 }
