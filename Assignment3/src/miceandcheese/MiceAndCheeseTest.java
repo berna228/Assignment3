@@ -33,6 +33,7 @@ public class MiceAndCheeseTest {
 	public static void main(String arg[]) {
 		for (int row = 0; row < 8; row++) {
 			for (int col = 0; col < 8; col++) {
+				// Errors on populating grid
 				if (col == row) grid[row][col] = new Box(true, row, col);
 				else grid[row][col] = new Box(false, row, col);
 			}
